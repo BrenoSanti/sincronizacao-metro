@@ -1,0 +1,437 @@
+Script started on 2026-11-04 20:01:07-03:00 [COMMAND="bash ../sessao.sh" TERM="tmux-256color" TTY="/dev/pts/2" COLUMNS="100" LINES="22"]
+$ date
+Wed Nov  4 20:01:07 -03 2026
+$ whoami
+breno
+$ pwd
+/tmp/bgs-validacao.fWvSQA/bgs
+$ set +x
+
+[E1] 2026-11-04 20:01:07 -0300 | Ambiente e construção com warnings tratados como erros
+$ uname -sr
+Linux 6.18.33.2-microsoft-standard-WSL2
+$ grep PRETTY_NAME /etc/os-release
+PRETTY_NAME="Ubuntu 26.04 LTS"
+$ cc -dumpfullversion
+15.2.0
+$ make --version
+$ head -1
+GNU Make 4.4.1
+$ make clean
+rm -f sync_car test_stations sync_car.o sync_car-runner.o test_stations.o
+$ make 'CFLAGS=-O2 -Wall -Wextra -Werror -std=gnu11'
+cc  -O2 -Wall -Wextra -Werror -std=gnu11 -pthread -c sync_car.c -o sync_car.o
+cc  -O2 -Wall -Wextra -Werror -std=gnu11 -pthread -c sync_car-runner.c -o sync_car-runner.o
+sync_car-runner.c: In function ‘alarm_handler’:
+sync_car-runner.c:54:24: error: unused parameter ‘foo’ []8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-parameter-Werror=unused-parameter]8;;]
+   54 | void alarm_handler(int foo)
+      |                    ~~~~^~~
+cc1: all warnings being treated as errors
+make: *** [Makefile:16: sync_car-runner.o] Error 1
+$ printf 'Código de saída do make estrito: %s\n' 2
+Código de saída do make estrito: 2
+$ set +x
+
+[E2] 2026-11-04 20:01:08 -0300 | Compilação do zero pelo Makefile da entrega
+$ make clean
+rm -f sync_car test_stations sync_car.o sync_car-runner.o test_stations.o
+$ make
+cc  -O2 -Wall -Wextra -std=gnu11 -pthread -c sync_car.c -o sync_car.o
+cc  -O2 -Wall -Wextra -std=gnu11 -pthread -c sync_car-runner.c -o sync_car-runner.o
+sync_car-runner.c: In function ‘alarm_handler’:
+sync_car-runner.c:54:24: warning: unused parameter ‘foo’ []8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-parameter-Wunused-parameter]8;;]
+   54 | void alarm_handler(int foo)
+      |                    ~~~~^~~
+cc  -pthread -o sync_car sync_car.o sync_car-runner.o 
+$ set +x
+
+[E3] 2026-11-04 20:01:10 -0300 | Runner original com 100 passageiros
+$ ./sync_car
+car entering station with 37 free seats
+car departed station with 37 new passenger(s) (expected 37)
+car entering station with 41 free seats
+car departed station with 41 new passenger(s) (expected 41)
+car entering station with 4 free seats
+car departed station with 4 new passenger(s) (expected 4)
+car entering station with 39 free seats
+car departed station with 18 new passenger(s) (expected 18)
+Looks good!
+$ set +x
+
+[E4] 2026-11-04 20:01:10 -0300 | Teste complementar e caso inválido
+$ make test_stations
+cc  -O2 -Wall -Wextra -std=gnu11 -pthread -c test_stations.c -o test_stations.o
+cc  -pthread -o test_stations sync_car.o test_stations.o 
+$ ./test_stations
+OK: capacidade -1 retorna sem conceder uma vaga.
+OK: duas reservas simultâneas e duas estações independentes.
+$ set +x
+
+[E5] 2026-11-04 20:01:11 -0300 | Repetições com escalonamentos diferentes
+$$ seq 1 40
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ for i in $(seq 1 40)
+$ ./sync_car
+$ grep -qx 'Looks good!' ../rodada.txt
+$ set +x
+Runner: 40/40 execuções aprovadas, com 100 passageiros por execução.
+$$ seq 1 100
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ for i in $(seq 1 100)
+$ ./test_stations
+$ set +x
+Teste complementar: 100/100 execuções aprovadas.
+
+[E6] 2026-11-04 20:01:24 -0300 | Validação final dos dois testes
+$ make test
+./sync_car
+car entering station with 4 free seats
+car departed station with 4 new passenger(s) (expected 4)
+car entering station with 4 free seats
+car departed station with 4 new passenger(s) (expected 4)
+car entering station with 9 free seats
+car departed station with 9 new passenger(s) (expected 9)
+car entering station with 1 free seats
+car departed station with 1 new passenger(s) (expected 1)
+car entering station with 47 free seats
+car departed station with 47 new passenger(s) (expected 47)
+car entering station with 48 free seats
+car departed station with 35 new passenger(s) (expected 35)
+Looks good!
+./test_stations
+OK: capacidade -1 retorna sem conceder uma vaga.
+OK: duas reservas simultâneas e duas estações independentes.
+$ set +x
+
+[E7] 2026-11-04 20:01:25 -0300 | Limpeza e controle dos fontes verificados
+$ make clean
+rm -f sync_car test_stations sync_car.o sync_car-runner.o test_stations.o
+$ ls -1
+Makefile
+evidencias.log
+sync_car-runner.c
+sync_car.c
+sync_car.h
+test_stations.c
+$ sha256sum sync_car-runner.c sync_car.c test_stations.c sync_car.h Makefile
+9597e03794b78aaa77f0219c5e5f91bf202c31b47e50ab5cc2fc192003129679  sync_car-runner.c
+2f1a8c412e267c84cf46cf0bcda83a53d8583f8223029c4dfe55418365e09e83  sync_car.c
+691815ed62b24c8f62c214b8919ae070f141febb323355647e0aa54bfde3cdef  test_stations.c
+0073f506236e60de2e3a66c184aa5fa7f9590f614f4629a6c09e36268f04fd2f  sync_car.h
+0eef91c3b96c0d32fe826a8b709b8b06ae3669a69ec75df1bf16675231a4835f  Makefile
+$ set +x
+
+Script done on 2026-11-04 20:01:25-03:00 [COMMAND_EXIT_CODE="0"]

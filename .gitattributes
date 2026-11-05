@@ -1,0 +1,6 @@
+* text=auto eol=lf
+/sync_car-runner.c -text
+/evidencias.log -text
+*.pdf binary
+*.tar binary
+*.png binary
